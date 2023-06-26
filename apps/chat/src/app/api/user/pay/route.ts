@@ -9,9 +9,6 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const plan = searchParams.get("plan")?.toLowerCase();
   const cycle = searchParams.get("cycle")?.toLowerCase();
-  console.log(email)
-  console.log(plan)
-  console.log(cycle)
   if (!email || !plan || !cycle) {
     return NextResponse.json({ status: ResponseStatus.Failed });
   }
@@ -20,7 +17,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ status: ResponseStatus.Failed });
   const planDal = new PlanDAL();
   const planPrices = await planDal.readProperty(plan, "prices");
-  console.log(planPrices)
 
   if (!planPrices)
     // TODO Refine error types
