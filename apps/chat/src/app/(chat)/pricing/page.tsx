@@ -81,28 +81,6 @@ function PricingItem(props: {
 
   return (
     <div className={styles["list"]}>
-      <div className={styles["list-item"]}>
-        <div className={styles["row"]}>
-          <div className={styles["title"]}>{props.price.name}</div>
-          {props.price.description && (
-            <div className={styles["sub-title"]}>{props.price.description}</div>
-          )}
-          ¥ {props.price.price[props.cycle]}
-        </div>
-        {props.price.features.map((feature, index) => (
-          <div key={index}>· {feature}</div>
-        ))}
-      </div>
-      {props.price.name !== "Free" && (
-        <div className={styles["purchase-wrapper"]}>
-          <IconButton
-            icon={<span>🎁</span>}
-            text={"购买"}
-            className={styles["purchase"] + " no-dark"}
-            onClick={() => handleUpgrade(props.price.name, props.cycle)}
-          />
-        </div>
-      )}
     </div>
   );
 }
