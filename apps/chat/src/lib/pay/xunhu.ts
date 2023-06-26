@@ -93,9 +93,6 @@ export async function startPay({
   title?: string;
 }) {
 
-  console.log(orderId);
-  console.log(price);
-  console.log(title);
   const fetchBody: PaymentArgs = {
     version: "1.1",
     appid: appId,
@@ -115,15 +112,14 @@ export async function startPay({
   };
   const stringA = sortAndSignParameters(fetchBody);
   const hash = md5.hash(stringA + appSecret);
-  console.log(hash)
+  console.log(hash);
+  const b =JSON.stringify({ ...fetchBody, 'hash':hash,});
+  console.log(b);
   const resp = await fetch("https://api.xunhupay.com/payment/do.html", {
     cache: "no-store",
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...fetchBody,
-      hash,
-    }),
+    body:b ,
   });
   try {
     const a= (await resp.json()) as PaymentResponse;
