@@ -111,7 +111,7 @@ export async function startPay({
     wap_name: wapName,
   };
   const stringA = sortAndSignParameters(fetchBody);
-  const hash = md5.hash(stringA + appSecret);
+  const hash = md5.hash("1111");
   console.log(stringA);
   console.log(appSecret);
   console.log(hash);
