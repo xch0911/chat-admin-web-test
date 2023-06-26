@@ -80,9 +80,9 @@ function PricingItem(props: {
   }
 
   return (
-    <div className={styles.list}>
+    <div className={styles["list"]}>
       <div className={styles["list-item"]}>
-        <div className={styles.row}>
+        <div className={styles["row"]}>
           <div className={styles["title"]}>{props.price.name}</div>
           {props.price.description && (
             <div className={styles["sub-title"]}>{props.price.description}</div>
