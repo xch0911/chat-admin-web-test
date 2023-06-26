@@ -111,17 +111,16 @@ export async function startPay({
     wap_name: wapName,
   };
   const stringA = sortAndSignParameters(fetchBody);
-  const hash = md5.hash("1111");
-  console.log(stringA);
-  console.log(appSecret);
+  const hash = md5.hash(stringA + appSecret);
   console.log(hash);
-  const b =JSON.stringify({ ...fetchBody, 'hash':hash});
-  console.log(b);
   const resp = await fetch("https://api.xunhupay.com/payment/do.html", {
     cache: "no-store",
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body:b ,
+    body: JSON.stringify({
+      ...fetchBody,
+      hash,
+    }),
   });
   try {
     const a= (await resp.json()) as PaymentResponse;
