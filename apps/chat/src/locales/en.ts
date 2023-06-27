@@ -40,6 +40,7 @@ const en: LocaleType = {
     ChatItemCount: (count: number) => `${count} messages`,
   },
   Chat: {
+    Rename:"Rename Chat",
     SubTitle: (count: number) => `${count} messages with ChatGPT`,
     Actions: {
       ChatList: "Go To Chat List",

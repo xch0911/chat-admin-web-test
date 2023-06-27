@@ -34,6 +34,7 @@ const cn = {
     ChatItemCount: (count: number) => `${count} 条对话`,
   },
   Chat: {
+    Rename:"重命名对话",
     SubTitle: (count: number) => `与 ChatGPT 的 ${count} 条对话`,
     Actions: {
       ChatList: "查看消息列表",

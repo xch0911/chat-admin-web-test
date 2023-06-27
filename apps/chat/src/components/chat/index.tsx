@@ -16,6 +16,7 @@ import styles from "@/styles/module/home.module.scss";
 import Locale from "@/locales";
 
 import MenuIcon from "@/assets/icons/menu.svg";
+import RenameIcon from "@/assets/icons/rename.svg";
 import BrainIcon from "@/assets/icons/brain.svg";
 import ExportIcon from "@/assets/icons/export.svg";
 import LoadingIcon from "@/assets/icons/three-dots.svg";
@@ -251,6 +252,13 @@ export function Chat() {
         : []
     );
 
+    const renameSession = () => {
+        const newTopic = prompt(Locale.Chat.Rename, session.topic);
+        if (newTopic && newTopic !== session.topic) {
+            useChatStore.updateCurrentSession((session) => (session.topic = newTopic!));
+        }
+    };
+
   // auto scroll
   useLayoutEffect(() => {
     setTimeout(() => {
@@ -290,6 +298,15 @@ export function Chat() {
               onClick={() => setSideBarOpen(true)}
             />
           </div>
+
+          <div className="window-action-button">
+            <IconButton
+                icon={<RenameIcon />}
+                bordered
+                onClick={renameSession}
+            />
+          </div>
+
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<BrainIcon/>}
