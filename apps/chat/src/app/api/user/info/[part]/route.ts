@@ -47,7 +47,6 @@ export async function GET(
       });
 
       const remain = await rateLimit?.remaining();
-      console.log(rateLimit)
       console.log(remain)
       return NextResponse.json({
         status: ResponseStatus.Success,

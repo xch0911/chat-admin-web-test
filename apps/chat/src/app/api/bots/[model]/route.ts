@@ -51,6 +51,7 @@ export async function POST(
 
   if (rateLimit) {
     const { success, remaining } = await rateLimit.limitEmail();
+    console.log(remaining)
 
     if (!success)
       return NextResponse.json({ code: LimitReason.TooMany }, { status: 429 });
