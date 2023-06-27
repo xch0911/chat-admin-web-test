@@ -207,10 +207,12 @@ export default function Profile() {
               value={config.submitKey}
               onClick={async () => {
                 await handleResetLimit();
-                await infoMutate({
-                  ...info!,
-                  resetChances: info?.resetChances! - 1 ?? 0,
-                });
+                  if (resetChances > 0) {
+                  await infoMutate({
+                    ...info!,
+                    resetChances: info?.resetChances! - 1 ?? 0,
+                  });
+                }
               }}
             >
               {Locale.Profile.Reset.Click(resetChances ?? 0)}
