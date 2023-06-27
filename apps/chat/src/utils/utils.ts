@@ -18,19 +18,18 @@ export function copyToClipboard(text: string) {
         // 使text area不在viewport，同时设置不可见
         document.body.appendChild(textArea)
         // textArea.focus()
-        // textArea.select()
+        textArea.select()
         return new Promise<void>((resolve, reject) => {
             // 执行复制命令并移除文本框
             document.execCommand('copy') ? resolve() : reject(new Error('出错了'))
             textArea.remove()
-        }).then(
-            () => {
-                showToast(Locale.Copy.Success);
-            },
-            () => {
-                showToast(Locale.Copy.Failed);
-            }
-        )
+        })
+        .then(() => {
+            showToast(Locale.Copy.Success);
+        })
+        .catch(() => {
+            showToast(Locale.Copy.Failed);
+        });
     });
 }
 
