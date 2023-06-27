@@ -500,7 +500,7 @@
 }
 
 .chat-input-send {
-  background-color: var(--primary);
+  background-color: var(--primary) !important;
   color: white;
 
   position: absolute;
