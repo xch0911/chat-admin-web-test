@@ -277,10 +277,10 @@ export function Chat() {
       <div className={styles["window-header"]}>
         {plan != "free" && (
           <div
-            className={styles["window-header-title"]  + " " + styles["chat-body-title"]}
+            className={styles["window-header-title"] }
             onClick={() => setSideBarOpen(true)}
           >
-            <div className={styles["window-header-main-title"]}  onClickCapture={renameSession}>
+            <div className={styles["window-header-main-title"]  + " " + styles["chat-body-title"]}  onClickCapture={renameSession}>
               {session.topic}
             </div>
             <div className={styles["window-header-sub-title"]}>
@@ -303,20 +303,21 @@ export function Chat() {
             <IconButton
                 icon={<RenameIcon />}
                 bordered
+                title={Locale.Chat.Actions.ChatList}
                 onClick={renameSession}
             />
           </div>
 
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<BrainIcon/>}
-              bordered
-              title={Locale.Chat.Actions.CompressedHistory}
-              onClick={() => {
-                showMemoryPrompt(session);
-              }}
-            />
-          </div>
+          {/*<div className={styles["window-action-button"]}>*/}
+            {/*<IconButton*/}
+              {/*icon={<BrainIcon/>}*/}
+              {/*bordered*/}
+              {/*title={Locale.Chat.Actions.CompressedHistory}*/}
+              {/*onClick={() => {*/}
+                {/*showMemoryPrompt(session);*/}
+              {/*}}*/}
+            {/*/>*/}
+          {/*</div>*/}
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ExportIcon/>}
