@@ -51,6 +51,7 @@ const cn = {
     Title: "用户信息",
     Plan: {
       Title: "计划",
+      SubTitle: "切换计划来升级"
     },
     Invite: {
       Title: "邀请他人",

@@ -82,7 +82,7 @@ export default function Profile() {
   };
 
   async function handleResetLimit() {
-    if (resetChances && resetChances < 1) {
+    if (resetChances < 1) {
       showToast("重置次数已用完");
       return;
     }
@@ -163,7 +163,7 @@ export default function Profile() {
 
           <ProfileItem
             title={Locale.Profile.Plan.Title}
-            subTitle="切换计划来升级"
+            subTitle={Locale.Profile.Plan.SubTitle}
           >
             <>
               <button

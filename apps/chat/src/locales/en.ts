@@ -58,6 +58,7 @@ const en: LocaleType = {
     Title: "User Information",
     Plan: {
       Title: "Plan",
+      SubTitle:"Switch plans to upgrade"
     },
     Invite: {
       Title: "Invite Others",
