@@ -277,10 +277,10 @@ export function Chat() {
       <div className={styles["window-header"]}>
         {plan != "free" && (
           <div
-            className={styles["window-header-title"]}
+            className={styles["window-header-title"]  + " " + styles["chat-body-title"]}
             onClick={() => setSideBarOpen(true)}
           >
-            <div className={styles["window-header-main-title"]}>
+            <div className={styles["window-header-main-title"]}  onClickCapture={renameSession}>
               {session.topic}
             </div>
             <div className={styles["window-header-sub-title"]}>
