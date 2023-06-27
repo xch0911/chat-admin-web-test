@@ -71,7 +71,7 @@ export class ModelRateLimiter extends Ratelimit {
     
     local requestsInCurrentWindow = redis.call("GET", currentKey)
     if requestsInCurrentWindow == false then
-      requestsInCurrentWindow = -1
+      requestsInCurrentWindow = 0
     end
     
     local requestsInPreviousWindow = redis.call("GET", previousKey)
