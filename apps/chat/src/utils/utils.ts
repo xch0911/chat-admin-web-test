@@ -6,36 +6,32 @@ export function trimTopic(topic: string) {
 }
 
 export function copyToClipboard(text: string) {
-  if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard
-        .writeText(text)
-        .then((res) => {
-          showToast(Locale.Copy.Success);
-        })
-        .catch((err) => {
-          showToast(Locale.Copy.Failed);
-        });
-  }else {
-      // 创建text area
-      const textArea = document.createElement('textarea')
-      textArea.value = text
-      // 使text area不在viewport，同时设置不可见
-      document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
-      return new Promise<void>((resolve, reject) => {
-          // 执行复制命令并移除文本框
-          document.execCommand('copy') ? resolve() : reject(new Error('出错了'))
-          textArea.remove()
-      }).then(
-          () => {
-              showToast(Locale.Copy.Success);
-          },
-          () => {
-              showToast(Locale.Copy.Failed);
-          }
-      )
-  }
+  navigator.clipboard
+    .writeText(text)
+    .then((res) => {
+      showToast(Locale.Copy.Success);
+    })
+    .catch((err) => {
+        // 创建text area
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        // 使text area不在viewport，同时设置不可见
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+        return new Promise<void>((resolve, reject) => {
+            // 执行复制命令并移除文本框
+            document.execCommand('copy') ? resolve() : reject(new Error('出错了'))
+            textArea.remove()
+        }).then(
+            () => {
+                showToast(Locale.Copy.Success);
+            },
+            () => {
+                showToast(Locale.Copy.Failed);
+            }
+        )
+    });
 }
 
 export function downloadAs(text: string, filename: string) {
