@@ -107,8 +107,8 @@ export class ModelRateLimiter extends Ratelimit {
     )) as number;
 
     const success = remaining > 0;
-    if remaining<0:
-      remaining =0;
+    if (remaining<0)
+        remaining =0;
     const reset = (currentWindow + 1) * this.#windowSize;
 
     return {
