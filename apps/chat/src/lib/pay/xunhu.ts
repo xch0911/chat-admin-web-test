@@ -112,7 +112,6 @@ export async function startPay({
   };
   const stringA = sortAndSignParameters(fetchBody);
   const hash = md5.hash(stringA + appSecret);
-  console.log(hash);
   const resp = await fetch("https://api.xunhupay.com/payment/do.html", {
     cache: "no-store",
     method: "POST",
