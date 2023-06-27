@@ -142,7 +142,7 @@ export function Chat() {
   };
 
   type RenderMessage = Message & { preview?: boolean };
-
+  const chatStore = useChatStore();
   const [sidebarOpen, setSideBarOpen, session, sessionIndex] = useChatStore(
     (state) => [
       state.showSideBar,
@@ -255,7 +255,7 @@ export function Chat() {
     const renameSession = () => {
         const newTopic = prompt(Locale.Chat.Rename, session.topic);
         if (newTopic && newTopic !== session.topic) {
-            useChatStore.updateCurrentSession((session) => (session.topic = newTopic!));
+            chatStore.updateCurrentSession((session) => (session.topic = newTopic!));
         }
     };
 
