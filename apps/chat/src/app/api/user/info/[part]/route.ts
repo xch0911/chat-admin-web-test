@@ -45,7 +45,10 @@ export async function GET(
         email,
         model: "gpt-3.5-turbo",
       });
+
       const remain = await rateLimit?.remaining();
+      console.log(rateLimit)
+      console.log(remain)
       return NextResponse.json({
         status: ResponseStatus.Success,
         data: remain,
