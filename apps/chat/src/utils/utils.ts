@@ -23,7 +23,7 @@ export function copyToClipboard(text: string) {
       document.body.appendChild(textArea)
       textArea.focus()
       textArea.select()
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
           // 执行复制命令并移除文本框
           document.execCommand('copy') ? resolve() : reject(new Error('出错了'))
           textArea.remove()
