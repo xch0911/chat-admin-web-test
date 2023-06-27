@@ -60,7 +60,7 @@ export function isMobileScreen() {
 
 export function selectOrCopy(el: HTMLElement, content: string) {
   const currentSelection = window.getSelection();
-
+showToast("1223333");
   if (currentSelection?.type === "Range") {
     return false;
   }
