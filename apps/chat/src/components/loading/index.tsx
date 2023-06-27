@@ -1,6 +1,6 @@
 import styles from "@/styles/module/home.module.scss";
 import BotIcon from "@/assets/icons/bot.svg";
-import LoadingIcon from "@/assets/icons/three-dots.svg";
+import LoadingIcon from "@/assets/icons/three-dots-bot.svg";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
