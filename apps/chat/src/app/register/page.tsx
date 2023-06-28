@@ -170,6 +170,7 @@ export default function Register() {
               />
               <button
                 className={styles["send-verification-button"]}
+                type="button"
                 onClick={handleSendVerification}
                 disabled={submitting}
               >
