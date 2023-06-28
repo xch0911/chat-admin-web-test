@@ -146,6 +146,30 @@ export default function Register() {
             required
           />
         </div>
+
+        {ifVerifyCode && (
+              <div className={styles["login-form-input-group"]}>
+                <label htmlFor="email">Verification Code</label>
+                <div className={styles["verification-code-container"]}>
+                  <input
+                      type="text"
+                      id="verification-code"
+                      maxLength={6}
+                      pattern="\d{6}"
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                  />
+                  <button
+                      className={styles["send-verification-button"]}
+                      type="button"
+                      onClick={handleSendVerification}
+                      disabled={submitting}
+                  >
+                      {isSending ? "Already Send to Email" : "Get Code"}
+                  </button>
+                </div>
+              </div>
+          )}
+
         <div className={styles["login-form-input-group"]}>
           <label htmlFor="password">Password</label>
           <input
@@ -156,29 +180,6 @@ export default function Register() {
             required
           />
         </div>
-
-        {ifVerifyCode && (
-          <div className={styles["login-form-input-group"]}>
-            <label htmlFor="email">Verification Code</label>
-            <div className={styles["verification-code-container"]}>
-              <input
-                type="text"
-                id="verification-code"
-                maxLength={6}
-                pattern="\d{6}"
-                onChange={(e) => setVerificationCode(e.target.value)}
-              />
-              <button
-                className={styles["send-verification-button"]}
-                type="button"
-                onClick={handleSendVerification}
-                disabled={submitting}
-              >
-                {isSending ? "Already Send to Email" : "Get Code"}
-              </button>
-            </div>
-          </div>
-        )}
 
         <div className={styles["login-form-input-group"]}>
           <label htmlFor="email">Invitation Code</label>
