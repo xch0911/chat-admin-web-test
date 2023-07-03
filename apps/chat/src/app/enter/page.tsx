@@ -40,7 +40,7 @@ export default function Index() {
                     password,
                     code: verificationCode,
                     code_type: "email",
-                    invitation_code: invitationCode.toLowerCase() ? ? "",
+                    invitation_code: invitationCode.toLowerCase() ?? "",
                 }),
             })
         ).json()) as RegisterResponse;
