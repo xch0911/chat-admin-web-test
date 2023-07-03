@@ -28,9 +28,7 @@ export default function Index() {
         state.updateEmail,
     ]);
 
-    const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
+    const handleRegister = async () => {
         const res = (await (
             await fetch("/api/user/register", {
                 cache: "no-store",
