@@ -21,6 +21,7 @@ export default function Index() {
     const [invitationCode, setInvitationCode] = useState(
         searchParams.get("code") ?? ""
     );
+
     const [updateSessionToken, updateEmail] = useUserStore((state) => [
         state.updateSessionToken,
         state.updateEmail,
