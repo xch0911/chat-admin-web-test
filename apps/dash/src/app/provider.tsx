@@ -25,12 +25,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   ]);
 
   useEffect(() => {
-    // if (!sessionToken || !validateSessionToken()) {
-    //   if (pathname !== "/login") return router.push("/login");
-    // } else {
-    //   if (pathname == "/login") return router.replace("/");
-    // }
-      return router.replace("/")
+    if (!sessionToken || !validateSessionToken()) {
+      if (pathname !== "/login") return router.push("/login");
+    } else {
+      if (pathname == "/login") return router.replace("/");
+    }
   }, [router, pathname, sessionToken, validateSessionToken]);
 
   return (
