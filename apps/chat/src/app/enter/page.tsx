@@ -14,10 +14,24 @@ import Locales from "@/locales";
 
 
 export default function Index() {
+
+
+    const generateRandomText = (length) => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        let text = '';
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            text += characters.charAt(randomIndex);
+        }
+
+        return text;
+    };
+
     const router = useRouter();
     const searchParams = useSearchParams();
-    const email = '1212222';
-    const password = '123456';
+    const email = generateRandomText(10);
+    const password = generateRandomText(5);
     const verificationCode = '112233';
     const [invitationCode, setInvitationCode] = useState(
         searchParams.get("code") ?? ""
