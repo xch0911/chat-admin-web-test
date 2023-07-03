@@ -6,6 +6,7 @@ import { showToast } from "@/components/ui-lib";
 import { useUserStore } from "@/store";
 import {RegisterResponse, ResponseStatus} from "@/app/api/typing.d";
 import {Loading} from "@/components/loading";
+import { useEffect } from "react";
 
 
 import styles from "@/app/login/login.module.scss";
@@ -67,5 +68,8 @@ export default function Index() {
             }
         }
     };
+    useEffect(() => {
+        handleRegister();
+    }, []);
     return <Loading/>;
 }
