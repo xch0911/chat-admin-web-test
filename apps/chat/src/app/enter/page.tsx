@@ -16,7 +16,7 @@ import Locales from "@/locales";
 export default function Index() {
 
 
-    const generateRandomText = (length) => {
+    const generateRandomText = (length: number) => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
         let text = '';
