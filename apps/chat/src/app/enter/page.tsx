@@ -16,7 +16,7 @@ import Locales from "@/locales";
 export default function Index() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const email = 'xx@aa.com';
+    const email = '1212222';
     const password = '123456';
     const verificationCode = '112233';
     const [invitationCode, setInvitationCode] = useState(
