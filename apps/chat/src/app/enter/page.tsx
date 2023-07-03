@@ -19,7 +19,7 @@ export default function Index() {
     const password = '123456';
     const verificationCode = '112233';
     const [invitationCode, setInvitationCode] = useState(
-        searchParams.get("code") ? ? ""
+        searchParams.get("code") ?? ""
     );
     const [updateSessionToken, updateEmail] = useUserStore((state) => [
         state.updateSessionToken,
