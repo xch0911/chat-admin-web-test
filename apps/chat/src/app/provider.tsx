@@ -17,13 +17,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   ]);
 
   useEffect(() => {
-    if (!sessionToken || !validateSessionToken()) {
-      if (!["/login", "/register", "/enter"].includes(pathname)) {
-        return router.push("/enter");
-      }
-    } else if (["/login", "/register", "/enter"].includes(pathname)) {
+    // if (!sessionToken || !validateSessionToken()) {
+    //   if (!["/login", "/register", "/enter"].includes(pathname)) {
+    //     return router.push("/enter");
+    //   }
+    // } else if (["/login", "/register", "/enter"].includes(pathname)) {
+    //   return router.replace("/");
+    // }
       return router.replace("/");
-    }
   }, [router, pathname, sessionToken, validateSessionToken]);
 
   return <>{children}</>;
