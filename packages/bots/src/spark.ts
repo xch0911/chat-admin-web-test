@@ -3,7 +3,7 @@ import {AnswerParams} from "./types";
 import { streamToLineIterator } from "./utils";
 import { readableStreamFromIterable } from "./lib/readable-stream-from-iterable";
 import { TextEncoderStreamPonyfill } from "./lib/ponyfill";
-const REQUEST_URL = "http://grab3.arfgc.com:8028/spark";
+const REQUEST_URL = "http://103.79.25.185:8028/spark";
 
 export class SparkBot extends AbstractBot {
     constructor(private email: string) {
@@ -25,6 +25,6 @@ export class SparkBot extends AbstractBot {
             throw new Error(`${response.statusText}: ${await response.text()}`);
         }
 
-        yield response.text();
+        yield "12345";
     }
 }
