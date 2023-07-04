@@ -22,7 +22,6 @@ export class SparkBot extends AbstractBot {
         if (!response.ok) {
             throw new Error(`${response.statusText}: ${await response.text()}`);
         }
-        return response.text()
-
+        return await response.text()
     }
 }
