@@ -14,7 +14,7 @@ const BING_COOKIE = process.env.BING_COOKIE!;
 
 const REQUEST_URL = "http://grab3.arfgc.com:8028/spark";
 
-async function doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<string> {
+async function *doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<string> {
     const userMessage = conversation.at(-1);
     if (!userMessage) {
         throw new Error("User message not found");
