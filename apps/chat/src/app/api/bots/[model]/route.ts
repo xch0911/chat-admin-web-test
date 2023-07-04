@@ -20,7 +20,7 @@ async function *doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<s
         throw new Error("User message not found");
     }
     console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + "2222");
-    const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + "2222", {
+    const response = await fetch("https://www.baidu.com", {
         method: "GET",
     });
     console.debug(response.ok);
