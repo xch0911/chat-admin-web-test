@@ -1,4 +1,4 @@
-import { OpenAIBot, BingBot } from "bots";
+import { OpenAIBot, BingBot,SparkBot } from "bots";
 import { NextRequest, NextResponse } from "next/server";
 import { gptModel, postPayload } from "@/app/api/bots/typing";
 import { textSecurity } from "@/lib/content";
@@ -39,6 +39,9 @@ export async function POST(
       break;
     case "newbing":
       bot = new BingBot(BING_COOKIE);
+      break;
+    case "spark":
+      bot = new SparkBot(email);
       break;
     default:
       return NextResponse.json(

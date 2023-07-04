@@ -8,10 +8,7 @@ export class BingBot extends AbstractBot {
   constructor(private cookie: string) {
     super();
   }
-
-  protected override async *doAnswer(
-    { conversation, signal }: AnswerParams,
-  ): AsyncIterable<string> {
+  protected async *doAnswer({ conversation, signal }: AnswerParams,): AsyncIterable<string> {
     const userMessage = conversation.at(-1);
     if (!userMessage) {
       throw new Error("User message not found");
