@@ -11,25 +11,23 @@ export class SparkBot extends AbstractBot {
     }
 
     protected async * doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<string> {
-        const userMessage = conversation.at(-1);
-        if (!userMessage) {
-            throw new Error("User message not found");
-        }
-        console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
-        const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
-            method: "GET",
-        });
-        console.debug(response);
+        // const userMessage = conversation.at(-1);
+        // if (!userMessage) {
+        //     throw new Error("User message not found");
+        // }
+        // console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
+        // const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
+        //     method: "GET",
+        // });
+        // console.debug(response);
+        //
+        // if (!response.ok) {
+        //     throw new Error(`${response.statusText}: ${await response.text()}`);
+        // }
+        // for await (const line of streamToLineIterator(response.body!)) {
+        //     yield line;
+        // }
 
-        if (!response.ok) {
-            throw new Error(`${response.statusText}: ${await response.text()}`);
-        }
-        for await (const line of streamToLineIterator(response.body!)) {
-            yield line;
-        }
-    }
-    answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
-        return readableStreamFromIterable(this.answer(params))
-            .pipeThrough(new TextEncoderStreamPonyfill());
+        yield "[ERROR]";
     }
 }
