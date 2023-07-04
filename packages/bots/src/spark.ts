@@ -1,5 +1,5 @@
 import {AbstractBot} from "./abstract-bot";
-import {AnswerParams, BingEvent, BingEventType, BingPayload} from "./types";
+import {AnswerParams} from "./types";
 
 const REQUEST_URL = "http://grab3.arfgc.com:8028/spark";
 

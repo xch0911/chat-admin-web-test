@@ -1,75 +1,75 @@
-import { OpenAIBot, BingBot,SparkBot } from "bots";
-import { NextRequest, NextResponse } from "next/server";
-import { gptModel, postPayload } from "@/app/api/bots/typing";
-import { textSecurity } from "@/lib/content";
-import { ModelRateLimiter } from "database";
-import { LimitReason } from "@/typing.d";
+import {OpenAIBot, BingBot, VercelAIBot, SparkBot} from "bots";
+import {NextRequest, NextResponse} from "next/server";
+import {gptModel, postPayload} from "@/app/api/bots/typing";
+import {textSecurity} from "@/lib/content";
+import {ModelRateLimiter} from "database";
+import {LimitReason} from "@/typing.d";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const BING_COOKIE = process.env.BING_COOKIE!;
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { model: string } }
-): Promise<NextResponse> {
-  const email = req.headers.get("email")!;
+export async function POST(req: NextRequest,
+                           {params}: { params: { model: string } }): Promise<NextResponse> {
+    const email = req.headers.get("email")!;
 
-  console.debug("[Route] [Bots]", email);
+    console.debug("[Route] [Bots]", email);
 
-  let payload;
+    let payload;
 
-  try {
-    payload = await new NextResponse(req.body).json();
-  } catch {
-    return NextResponse.json({ error: "invalid JSON" }, { status: 400 }); // TODO correct code
-  }
+    try {
+        payload = await new NextResponse(req.body).json();
+    } catch {
+        return NextResponse
+.
+    json({error: "invalid JSON"}, {status: 400}); // TODO correct code
+}
 
-  const parseResult = postPayload.safeParse(payload);
+    const parseResult = postPayload.safeParse(payload);
 
-  if (!parseResult.success) return NextResponse.json(parseResult.error);
+    if (!parseResult.success) return NextResponse.json(parseResult.error);
 
-  const { conversation, maxTokens, model } = parseResult.data;
+    const {conversation, maxTokens, model} = parseResult.data;
 
-  let bot;
+    let bot;
 
-  switch (params.model) {
-    case "openai":
-      const validatedModel = gptModel.parse(model);
-      bot = new OpenAIBot(OPENAI_API_KEY, validatedModel);
-      break;
-    case "newbing":
-      bot = new BingBot(BING_COOKIE);
-      break;
-    case "spark":
-      bot = new SparkBot(email);
-      break;
-    default:
-      return NextResponse.json(
-        { msg: "unable to find model" },
-        { status: 404 }
-      );
-  }
+    switch (params.model) {
+        case "openai":
+            const validatedModel = gptModel.parse(model);
+            bot = new OpenAIBot(OPENAI_API_KEY, validatedModel);
+            break;
+        case "newbing":
+            bot = new BingBot(BING_COOKIE);
+            break;
+        case "spark":
+            bot = new SparkBot(email);
+            break;
+        default:
+            return NextResponse.json(
+                {msg: "unable to find model"},
+                {status: 404}
+            );
+    }
 
-  const rateLimit = await ModelRateLimiter.of({ email, model });
+    const rateLimit = await ModelRateLimiter.of({email, model});
 
-  if (rateLimit) {
-    const { success, remaining } = await rateLimit.limitEmail();
-    if (!success)
-      return NextResponse.json({ code: LimitReason.TooMany }, { status: 429 });
-  } else {
-    console.debug("[RateLimit] 尚未设置 Free 计划的限制");
-  }
+    if (rateLimit) {
+        const {success, remaining} = await rateLimit.limitEmail();
+        if (!success)
+            return NextResponse.json({code: LimitReason.TooMany}, {status: 429});
+    } else {
+        console.debug("[RateLimit] 尚未设置 Free 计划的限制");
+    }
 
-  // 文本安全 TODO 节流
-  if (!(await textSecurity(conversation)))
-    return NextResponse.json(
-      { code: LimitReason.TextNotSafe, msg: "Contains sensitive keywords." },
-      { status: 402 }
+    // 文本安全 TODO 节流
+    if (!(await textSecurity(conversation)))
+        return NextResponse.json(
+            {code: LimitReason.TextNotSafe, msg: "Contains sensitive keywords."},
+            {status: 402}
+        );
+
+    return new NextResponse(
+        bot.answerStream({conversation, signal: req.signal})
     );
-
-  return new NextResponse(
-    bot.answerStream({ conversation, signal: req.signal })
-  );
 }
 
 export const runtime = "edge";
