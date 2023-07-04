@@ -1,4 +1,4 @@
-import {OpenAIBot, BingBot, VercelAIBot, SparkBot} from "bots";
+import {OpenAIBot, BingBot, OpenAIBot2} from "bots";
 import {NextRequest, NextResponse} from "next/server";
 import {gptModel, postPayload} from "@/app/api/bots/typing";
 import {textSecurity} from "@/lib/content";
