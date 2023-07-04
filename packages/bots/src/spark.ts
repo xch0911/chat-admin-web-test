@@ -22,6 +22,6 @@ export class SparkBot extends AbstractBot {
             throw new Error(`${response.statusText}: ${await response.text()}`);
         }
 
-        yield "12345";
+        yield response.text();
     }
 }
