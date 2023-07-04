@@ -7,7 +7,7 @@ import {LimitReason} from "@/typing.d";
 
 import { readableStreamFromIterable } from "./lib/readable-stream-from-iterable";
 import { TextEncoderStreamPonyfill } from "./lib/ponyfill";
-import {AnswerParams} from "./types";
+import { AnswerParams} from "./types";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const BING_COOKIE = process.env.BING_COOKIE!;
