@@ -40,6 +40,10 @@ export const ALL_MODELS = [
     name: "newbing",
     available: true,
   },
+  {
+    name: "spark",
+    available: true,
+  },
 ];
 
 export function isValidModel(name: string) {
