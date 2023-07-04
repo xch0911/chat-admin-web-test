@@ -19,8 +19,8 @@ export  async  function * doAnswer({conversation, signal}: AnswerParams,): Async
     if (!userMessage) {
         throw new Error("User message not found");
     }
-    console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
-    const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
+    console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + "2222");
+    const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + "2222", {
         method: "GET",
     });
     console.debug(response);
