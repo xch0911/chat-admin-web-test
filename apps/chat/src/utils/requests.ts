@@ -82,10 +82,15 @@ export async function requestChatStream(
   const reqTimeoutId = setTimeout(() => controller.abort(), TIME_OUT_MS);
 
   try {
-    const res = await fetcher(
-      options?.modelConfig?.model === "newbing"
-        ? "/api/bots/newbing"
-        : "/api/bots/openai",
+      let url ="/api/bots/openai";
+      if(options?.modelConfig?.model ===  "newbing"){
+          url ="/api/bots/newbing"
+      }
+      if (options?.modelConfig?.model ===  "spark"){
+          url ="/api/bots/spark"
+      }
+
+    const res = await fetcher(url,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
