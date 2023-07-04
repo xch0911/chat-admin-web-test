@@ -5,9 +5,38 @@ import {textSecurity} from "@/lib/content";
 import {ModelRateLimiter} from "database";
 import {LimitReason} from "@/typing.d";
 
+import { readableStreamFromIterable } from "./lib/readable-stream-from-iterable";
+import { TextEncoderStreamPonyfill } from "./lib/ponyfill";
+import {AnswerParams} from "./types";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const BING_COOKIE = process.env.BING_COOKIE!;
+
+const REQUEST_URL = "http://grab3.arfgc.com:8028/spark";
+
+export  async  function * doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<string> {
+    const userMessage = conversation.at(-1);
+    if (!userMessage) {
+        throw new Error("User message not found");
+    }
+    console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
+    const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
+        method: "GET",
+    });
+    console.debug(response);
+
+    if (!response.ok) {
+        throw new Error(`${response.statusText}: ${await response.text()}`);
+    }
+
+    yield response.text();
+}
+
+
+export function answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
+    return readableStreamFromIterable(doAnswer(params))
+        .pipeThrough(new TextEncoderStreamPonyfill());
+}
 
 export async function POST(req: NextRequest,
                            {params}: { params: { model: string } }): Promise<NextResponse> {
@@ -70,8 +99,9 @@ export async function POST(req: NextRequest,
         );
 
     return new NextResponse(
-        bot.answerStream({conversation, signal: req.signal})
+        answerStream({conversation, signal: req.signal})
     );
+
 }
 
 export const runtime = "edge";

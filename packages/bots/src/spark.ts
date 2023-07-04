@@ -11,23 +11,20 @@ export class SparkBot extends AbstractBot {
     }
 
     protected async * doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<string> {
-        // const userMessage = conversation.at(-1);
-        // if (!userMessage) {
-        //     throw new Error("User message not found");
-        // }
-        // console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
-        // const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
-        //     method: "GET",
-        // });
-        // console.debug(response);
-        //
-        // if (!response.ok) {
-        //     throw new Error(`${response.statusText}: ${await response.text()}`);
-        // }
-        // for await (const line of streamToLineIterator(response.body!)) {
-        //     yield line;
-        // }
+        const userMessage = conversation.at(-1);
+        if (!userMessage) {
+            throw new Error("User message not found");
+        }
+        console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
+        const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
+            method: "GET",
+        });
+        console.debug(response);
 
-        yield "[ERROR]";
+        if (!response.ok) {
+            throw new Error(`${response.statusText}: ${await response.text()}`);
+        }
+
+        yield response.text();
     }
 }
