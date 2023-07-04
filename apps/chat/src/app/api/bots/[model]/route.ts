@@ -23,7 +23,7 @@ async function *doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<s
     const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + "2222", {
         method: "GET",
     });
-    console.debug(response);
+    console.debug(response.ok);
 
     if (!response.ok) {
         throw new Error(`${response.statusText}: ${await response.text()}`);
@@ -34,6 +34,7 @@ async function *doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<s
 
 
 function answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
+    console.debug(1111)
     return readableStreamFromIterable(doAnswer(params))
         .pipeThrough(new TextEncoderStreamPonyfill());
 }
