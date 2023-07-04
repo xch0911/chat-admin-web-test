@@ -13,6 +13,7 @@ export async function POST(req: NextRequest,
     const email = req.headers.get("email")!;
 
     console.debug("[Route] [Bots]", email);
+    console.debug( params.model);
 
     let payload;
 
