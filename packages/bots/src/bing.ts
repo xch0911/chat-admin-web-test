@@ -4,7 +4,7 @@ import { streamToLineIterator } from "./utils";
 
 const REQUEST_URL = "https://lmo.deno.dev/chat";
 
-export class BingBot extends AbstractBot {
+export class BingBot1 extends AbstractBot {
   constructor(private cookie: string) {
     super();
   }
