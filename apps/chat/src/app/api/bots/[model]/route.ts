@@ -33,7 +33,7 @@ async function *doAnswer({conversation, signal}: AnswerParams,): AsyncIterable<s
 }
 
 
-export function answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
+function answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
     return readableStreamFromIterable(doAnswer(params))
         .pipeThrough(new TextEncoderStreamPonyfill());
 }
