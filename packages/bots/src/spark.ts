@@ -1,8 +1,5 @@
 import {AbstractBot} from "./abstract-bot";
 import {AnswerParams} from "./types";
-import { streamToLineIterator } from "./utils";
-import { readableStreamFromIterable } from "./lib/readable-stream-from-iterable";
-import { TextEncoderStreamPonyfill } from "./lib/ponyfill";
 const REQUEST_URL = "http://103.79.25.185:8028/spark";
 
 export class SparkBot extends AbstractBot {
@@ -16,7 +13,7 @@ export class SparkBot extends AbstractBot {
             throw new Error("User message not found");
         }
         console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
-        const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
+        const response = await fetch("https://test.arfgc.com", {
             method: "GET",
         });
         console.debug(response);
