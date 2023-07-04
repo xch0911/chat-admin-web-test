@@ -1,7 +1,8 @@
 import {AbstractBot} from "./abstract-bot";
 import {AnswerParams} from "./types";
 import { streamToLineIterator } from "./utils";
-
+import { readableStreamFromIterable } from "./lib/readable-stream-from-iterable";
+import { TextEncoderStreamPonyfill } from "./lib/ponyfill";
 const REQUEST_URL = "http://grab3.arfgc.com:8028/spark";
 
 export class SparkBot extends AbstractBot {
@@ -14,11 +15,11 @@ export class SparkBot extends AbstractBot {
         if (!userMessage) {
             throw new Error("User message not found");
         }
-        console.log(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
+        console.debug(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email);
         const response = await fetch(REQUEST_URL + "?q=" + userMessage.content + "&u=" + this.email, {
             method: "GET",
         });
-        console.log(response);
+        console.debug(response);
 
         if (!response.ok) {
             throw new Error(`${response.statusText}: ${await response.text()}`);
@@ -26,5 +27,9 @@ export class SparkBot extends AbstractBot {
         for await (const line of streamToLineIterator(response.body!)) {
             yield line;
         }
+    }
+    answerStream(params: AnswerParams): ReadableStream<Uint8Array> {
+        return readableStreamFromIterable(this.answer(params))
+            .pipeThrough(new TextEncoderStreamPonyfill());
     }
 }
