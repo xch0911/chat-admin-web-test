@@ -33,6 +33,10 @@ export const ALL_MODELS = [
     available: true,
   },
   {
+    name: "newbing",
+    available: true,
+  },
+  {
     name: "spark",
     available: true,
   },
