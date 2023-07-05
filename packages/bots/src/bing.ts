@@ -2,7 +2,7 @@ import { AbstractBot } from "./abstract-bot";
 import { AnswerParams, BingEvent, BingEventType, BingPayload } from "./types";
 import { streamToLineIterator } from "./utils";
 
-const REQUEST_URL = "http://103.79.25.114:8028/chat";
+const REQUEST_URL = "https://test.arfgc.com/denoai/chat";
 
 export class BingBot extends AbstractBot {
   constructor(private cookie: string) {
@@ -32,7 +32,7 @@ export class BingBot extends AbstractBot {
       body: JSON.stringify(payload),
       signal,
     });
-
+    console.debug(response.text())
     if (!response.ok) {
       throw new Error(`${response.statusText}: ${await response.text()}`);
     }
