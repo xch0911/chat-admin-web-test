@@ -23,7 +23,7 @@ export class BingBot extends AbstractBot {
         })),
       cookie: this.cookie,
     };
-
+    console.debug("11111");
     const response = await fetch(REQUEST_URL, {
       method: "POST",
       headers: {
@@ -32,7 +32,8 @@ export class BingBot extends AbstractBot {
       body: JSON.stringify(payload),
       signal,
     });
-    console.debug(response.text())
+    console.debug("222222");
+    console.debug(response.text());
     if (!response.ok) {
       throw new Error(`${response.statusText}: ${await response.text()}`);
     }
