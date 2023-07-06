@@ -5,7 +5,7 @@ import { LimitReason } from "@/typing.d";
 import fetcher from "@/utils/fetcher";
 
 /* 请求的超时时间 */
-const TIME_OUT_MS = 30000;
+const TIME_OUT_MS = 60000;
 
 if (!Array.prototype.at) {
   require("array.prototype.at/auto");
