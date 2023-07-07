@@ -29,6 +29,10 @@ if (!Array.prototype.at) {
 
 export const ALL_MODELS = [
   {
+    name: "gpt-4",
+    available: true,
+  },
+  {
     name: "gpt-3.5-turbo",
     available: true,
   },
